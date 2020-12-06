@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@mipmap/bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign up"
+        android:layout_marginTop="20dp"
+        android:textSize="40sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="It hurts to remember,\nbut it'd be worse to forget."
+        android:layout_margin="10dp"
+        android:gravity="center_horizontal"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/add_photo"
+        android:layout_margin="10dp"/>
+    <ProgressBar
+        android:id="@+id/pro_bar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:visibility="invisible"/>
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginLeft ="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="18dp"
+        android:inputType="text"
+        android:hint="Name and Surname"
+        android:gravity="center"
+        android:textColor="#cccccc"
+        android:background="@mipmap/border"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginLeft ="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="18dp"
+        android:inputType="text"
+        android:hint="Emall adress"
+        android:gravity="center"
+        android:textColor="#cccccc"
+        android:background="@mipmap/border"/>
+    <EditText
+        android:id="@+id/pwd"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_marginLeft ="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="18dp"
+        android:inputType="textPassword"
+        android:hint="password"
+        android:gravity="center"
+        android:textColor="#cccccc"
+        android:background="@mipmap/border"
+        android:maxLength="16"/>
+    <Button
+        android:id="@+id/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:layout_marginLeft ="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@mipmap/btn"
+        android:onClick="Register"/>
+
+</LinearLayout>
