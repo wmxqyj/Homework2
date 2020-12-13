@@ -1,0 +1,212 @@
+[1mdiff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml[m
+[1mindex 3f84f0d..9e937dc 100644[m
+[1m--- a/app/src/main/AndroidManifest.xml[m
+[1m+++ b/app/src/main/AndroidManifest.xml[m
+[36m@@ -9,7 +9,7 @@[m
+         android:roundIcon="@mipmap/ic_launcher_round"[m
+         android:supportsRtl="true"[m
+         android:theme="@style/Theme.Homework2">[m
+[31m-        <activity android:name=".UserActivity"></activity>[m
+[32m+[m[32m        <activity android:name=".UserActivity" />[m
+         <activity android:name=".MainActivity">[m
+             <intent-filter>[m
+                 <action android:name="android.intent.action.MAIN" />[m
+[1mdiff --git a/app/src/main/java/com/example/homework2/MainActivity.java b/app/src/main/java/com/example/homework2/MainActivity.java[m
+[1mindex 49ad2cb..db54415 100644[m
+[1m--- a/app/src/main/java/com/example/homework2/MainActivity.java[m
+[1m+++ b/app/src/main/java/com/example/homework2/MainActivity.java[m
+[36m@@ -6,7 +6,6 @@[m [mimport android.content.Intent;[m
+ import android.os.Bundle;[m
+ import android.view.View;[m
+ import android.widget.EditText;[m
+[31m-import android.widget.ProgressBar;[m
+ import android.widget.Toast;[m
+ [m
+ public class MainActivity extends AppCompatActivity {[m
+[36m@@ -17,35 +16,21 @@[m [mpublic class MainActivity extends AppCompatActivity {[m
+         setContentView( R.layout.activity_main );[m
+     }[m
+ [m
+[32m+[m[32m   //登录[m
+     public void Register(View v){[m
+         //判断姓名、密码是否为空[m
+         EditText nameedt = findViewById( R.id.name );[m
+         EditText pwdedt = findViewById( R.id.pwd );[m
+[31m-        ProgressBar probar = findViewById( R.id.pro_bar );[m
+ [m
+         String name = nameedt.getText().toString();[m
+         String pwd = pwdedt.getText().toString();[m
+         if(name.equals( "" ) || pwd.equals( "" )) {[m
+             //为空则提示输入[m
+[31m-[m
+             Toast.makeText(this,"账号或密码不能为空",Toast.LENGTH_SHORT).show();[m
+         }else {[m
+[31m-            //都不为空，则加载进度条[m
+[31m-            probar.setVisibility(View.VISIBLE );[m
+[31m-            new Thread(){[m
+[31m-                @Override[m
+[31m-                public void run() {[m
+[31m-                    for (int i= 0;i <= 100;i++){[m
+[31m-                        probar.setProgress( i );[m
+[31m-                        try {[m
+[31m-                            Thread.sleep( 30 );[m
+[31m-                        } catch (InterruptedException e) {[m
+[31m-                            e.printStackTrace();[m
+[31m-                        }[m
+[31m-                    }[m
+[31m-                }[m
+[31m-            }.start();[m
+[31m-            startActivity( new Intent(this,UserActivity.class) );[m
+[32m+[m[32m            startActivity( new Intent( MainActivity.this, UserActivity.class ) );[m
+         }[m
+     }[m
+[32m+[m
+[32m+[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml[m
+[1mindex 3a0b46d..9ed47e9 100644[m
+[1m--- a/app/src/main/res/layout/activity_main.xml[m
+[1m+++ b/app/src/main/res/layout/activity_main.xml[m
+[36m@@ -26,12 +26,6 @@[m
+         android:layout_height="wrap_content"[m
+         android:src="@mipmap/add_photo"[m
+         android:layout_margin="10dp"/>[m
+[31m-    <ProgressBar[m
+[31m-        android:id="@+id/pro_bar"[m
+[31m-        android:layout_width="match_parent"[m
+[31m-        android:layout_height="30dp"[m
+[31m-        style="?android:attr/progressBarStyleHorizontal"[m
+[31m-        android:visibility="invisible"/>[m
+     <EditText[m
+         android:id="@+id/name"[m
+         android:layout_width="match_parent"[m
+[36m@@ -40,18 +34,7 @@[m
+         android:layout_marginRight="30dp"[m
+         android:layout_marginTop="18dp"[m
+         android:inputType="text"[m
+[31m-        android:hint="Name and Surname"[m
+[31m-        android:gravity="center"[m
+[31m-        android:textColor="#cccccc"[m
+[31m-        android:background="@mipmap/border"/>[m
+[31m-    <EditText[m
+[31m-        android:layout_width="match_parent"[m
+[31m-        android:layout_height="68dp"[m
+[31m-        android:layout_marginLeft ="30dp"[m
+[31m-        android:layout_marginRight="30dp"[m
+[31m-        android:layout_marginTop="18dp"[m
+[31m-        android:inputType="text"[m
+[31m-        android:hint="Emall adress"[m
+[32m+[m[32m        android:hint="Name"[m
+         android:gravity="center"[m
+         android:textColor="#cccccc"[m
+         android:background="@mipmap/border"/>[m
+[36m@@ -66,17 +49,17 @@[m
+         android:hint="password"[m
+         android:gravity="center"[m
+         android:textColor="#cccccc"[m
+[31m-        android:background="@mipmap/border"[m
+[31m-        android:maxLength="16"/>[m
+[32m+[m[32m        android:background="@mipmap/border"/>[m
+[32m+[m
+     <Button[m
+         android:id="@+id/register"[m
+         android:layout_width="match_parent"[m
+         android:layout_height="wrap_content"[m
+[31m-        android:text="Register"[m
+[31m-        android:layout_marginLeft ="30dp"[m
+[32m+[m[32m        android:layout_marginLeft="30dp"[m
+[32m+[m[32m        android:layout_marginTop="30dp"[m
+         android:layout_marginRight="30dp"[m
+[31m-        android:layout_marginTop="40dp"[m
+         android:background="@mipmap/btn"[m
+[31m-        android:onClick="Register"/>[m
+[32m+[m[32m        android:onClick="Register"[m
+[32m+[m[32m        android:text="Register" />[m
+ [m
+ </LinearLayout>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/src/main/res/layout/activity_user.xml b/app/src/main/res/layout/activity_user.xml[m
+[1mindex 18c797a..c90e0aa 100644[m
+[1m--- a/app/src/main/res/layout/activity_user.xml[m
+[1m+++ b/app/src/main/res/layout/activity_user.xml[m
+[36m@@ -6,70 +6,21 @@[m
+     android:layout_height="match_parent"[m
+     tools:context=".UserActivity">[m
+ [m
+[31m-    <ImageButton[m
+[31m-        android:id="@+id/btn2"[m
+[31m-        android:layout_width="77dp"[m
+[31m-        android:layout_height="64dp"[m
+[31m-        android:src="@mipmap/ic_back_register"[m
+[31m-        app:layout_constraintBottom_toBottomOf="parent"[m
+[31m-        app:layout_constraintEnd_toEndOf="parent"[m
+[31m-        app:layout_constraintHorizontal_bias="0.011"[m
+[31m-        app:layout_constraintStart_toStartOf="parent"[m
+[31m-        app:layout_constraintTop_toTopOf="parent"[m
+[31m-        app:layout_constraintVertical_bias="0.01"[m
+[31m-        android:onClick="MyClick"/>[m
+ [m
+[31m-    <ImageView[m
+[31m-        android:id="@+id/imageView"[m
+[32m+[m[32m    <TextView[m
+[32m+[m[32m        android:id="@+id/count_down"[m
+         android:layout_width="254dp"[m
+         android:layout_height="144dp"[m
+         android:layout_gravity="center_horizontal"[m
+[31m-        android:layout_marginStart="76dp"[m
+[31m-        android:layout_marginLeft="76dp"[m
+         android:layout_weight="1"[m
+[31m-        app:layout_constraintBottom_toBottomOf="parent"[m
+[31m-        app:layout_constraintStart_toStartOf="parent"[m
+[31m-        app:layout_constraintTop_toTopOf="parent"[m
+[31m-        app:layout_constraintVertical_bias="0.168"[m
+[31m-        app:srcCompat="@mipmap/head" />[m
+[31m-[m
+[31m-    <TextView[m
+[31m-        android:id="@+id/textView"[m
+[31m-        android:layout_width="205dp"[m
+[31m-        android:layout_height="51dp"[m
+[31m-        android:text="姓名：无与伦比"[m
+[31m-        android:gravity="center_horizontal|center_vertical"[m
+[31m-        android:textSize="20sp"[m
+[32m+[m[32m        android:gravity="center"[m
+[32m+[m[32m        android:text="30"[m
+[32m+[m[32m        android:textSize="100sp"[m
+[32m+[m[32m        android:textStyle="bold"[m
+         app:layout_constraintBottom_toBottomOf="parent"[m
+         app:layout_constraintEnd_toEndOf="parent"[m
+         app:layout_constraintStart_toStartOf="parent"[m
+[31m-        app:layout_constraintTop_toBottomOf="@+id/imageView"[m
+[31m-        app:layout_constraintVertical_bias="0.086" />[m
+[31m-[m
+[31m-    <TextView[m
+[31m-        android:id="@+id/textView2"[m
+[31m-        android:layout_width="205dp"[m
+[31m-        android:layout_height="51dp"[m
+[31m-        android:text="性别：男"[m
+[31m-        android:gravity="center_horizontal|center_vertical"[m
+[31m-        android:textSize="20sp"[m
+[31m-        app:layout_constraintBottom_toBottomOf="parent"[m
+[31m-        app:layout_constraintEnd_toEndOf="parent"[m
+[31m-        app:layout_constraintStart_toStartOf="parent"[m
+[31m-        app:layout_constraintTop_toBottomOf="@+id/imageView"[m
+[31m-        app:layout_constraintVertical_bias="0.274"/>[m
+[31m-[m
+[31m-    <TextView[m
+[31m-        android:id="@+id/textView3"[m
+[31m-        android:layout_width="205dp"[m
+[31m-        android:layout_height="51dp"[m
+[31m-        android:text="爱好：无"[m
+[31m-        android:gravity="center_horizontal|center_vertical"[m
+[31m-        android:textSize="20sp"[m
+[31m-        app:layout_constraintBottom_toBottomOf="parent"[m
+[31m-        app:layout_constraintEnd_toEndOf="parent"[m
+[31m-        app:layout_constraintStart_toStartOf="parent"[m
+[31m-        app:layout_constraintTop_toBottomOf="@+id/imageView"[m
+[31m-        app:layout_constraintVertical_bias="0.443" />[m
+[32m+[m[32m        app:layout_constraintTop_toTopOf="parent"[m
+[32m+[m[32m        app:layout_constraintVertical_bias="0.168" />[m
+ [m
+ </androidx.constraintlayout.widget.ConstraintLayout>[m
+\ No newline at end of file[m

@@ -1,0 +1,290 @@
+Index: app/src/main/java/com/example/homework2/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/homework2/MainActivity.java	(revision feefdcff43076376b0c4cde7d835616252a76f5a)
++++ app/src/main/java/com/example/homework2/MainActivity.java	(date 1607872322511)
+@@ -6,7 +6,6 @@
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.EditText;
+-import android.widget.ProgressBar;
+ import android.widget.Toast;
+ 
+ public class MainActivity extends AppCompatActivity {
+@@ -17,35 +16,21 @@
+         setContentView( R.layout.activity_main );
+     }
+ 
++   //登录
+     public void Register(View v){
+         //判断姓名、密码是否为空
+         EditText nameedt = findViewById( R.id.name );
+         EditText pwdedt = findViewById( R.id.pwd );
+-        ProgressBar probar = findViewById( R.id.pro_bar );
+ 
+         String name = nameedt.getText().toString();
+         String pwd = pwdedt.getText().toString();
+         if(name.equals( "" ) || pwd.equals( "" )) {
+             //为空则提示输入
+-
+             Toast.makeText(this,"账号或密码不能为空",Toast.LENGTH_SHORT).show();
+         }else {
+-            //都不为空，则加载进度条
+-            probar.setVisibility(View.VISIBLE );
+-            new Thread(){
+-                @Override
+-                public void run() {
+-                    for (int i= 0;i <= 100;i++){
+-                        probar.setProgress( i );
+-                        try {
+-                            Thread.sleep( 30 );
+-                        } catch (InterruptedException e) {
+-                            e.printStackTrace();
+-                        }
+-                    }
+-                }
+-            }.start();
+-            startActivity( new Intent(this,UserActivity.class) );
++            startActivity( new Intent( MainActivity.this, UserActivity.class ) );
+         }
+     }
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_user.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_user.xml	(revision feefdcff43076376b0c4cde7d835616252a76f5a)
++++ app/src/main/res/layout/activity_user.xml	(date 1607873262180)
+@@ -6,70 +6,21 @@
+     android:layout_height="match_parent"
+     tools:context=".UserActivity">
+ 
+-    <ImageButton
+-        android:id="@+id/btn2"
+-        android:layout_width="77dp"
+-        android:layout_height="64dp"
+-        android:src="@mipmap/ic_back_register"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.011"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.01"
+-        android:onClick="MyClick"/>
+ 
+-    <ImageView
+-        android:id="@+id/imageView"
++    <TextView
++        android:id="@+id/count_down"
+         android:layout_width="254dp"
+         android:layout_height="144dp"
+         android:layout_gravity="center_horizontal"
+-        android:layout_marginStart="76dp"
+-        android:layout_marginLeft="76dp"
+         android:layout_weight="1"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent"
+-        app:layout_constraintVertical_bias="0.168"
+-        app:srcCompat="@mipmap/head" />
+-
+-    <TextView
+-        android:id="@+id/textView"
+-        android:layout_width="205dp"
+-        android:layout_height="51dp"
+-        android:text="姓名：无与伦比"
+-        android:gravity="center_horizontal|center_vertical"
+-        android:textSize="20sp"
++        android:gravity="center"
++        android:text="30"
++        android:textSize="100sp"
++        android:textStyle="bold"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+-        app:layout_constraintVertical_bias="0.086" />
+-
+-    <TextView
+-        android:id="@+id/textView2"
+-        android:layout_width="205dp"
+-        android:layout_height="51dp"
+-        android:text="性别：男"
+-        android:gravity="center_horizontal|center_vertical"
+-        android:textSize="20sp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+-        app:layout_constraintVertical_bias="0.274"/>
+-
+-    <TextView
+-        android:id="@+id/textView3"
+-        android:layout_width="205dp"
+-        android:layout_height="51dp"
+-        android:text="爱好：无"
+-        android:gravity="center_horizontal|center_vertical"
+-        android:textSize="20sp"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+-        app:layout_constraintVertical_bias="0.443" />
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.168" />
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/homework2/UserActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/homework2/UserActivity.java	(revision feefdcff43076376b0c4cde7d835616252a76f5a)
++++ app/src/main/java/com/example/homework2/UserActivity.java	(date 1607873240820)
+@@ -4,16 +4,49 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.os.Handler;
+ import android.view.View;
++import android.widget.TextView;
++import android.widget.Toast;
+ 
+ public class UserActivity extends AppCompatActivity {
++    private TextView count_down_num;
++    private Handler mhandler=new Handler();
++    private int  time=30;
++        Runnable runnable = new Runnable() {
++            @Override
++            public void run() {
++                time--;
++                count_down_num.setText( time + "" );
++                if (time == 0) {
++                    Intent intent = new Intent( UserActivity.this, MainActivity.class );
++                    startActivity( intent );
++                    finish();
++                } else {
++                    mhandler.postDelayed( runnable, 1000 );
++                }
++
++            }
++        };
++
+ 
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate( savedInstanceState );
+-        setContentView( R.layout.activity_user );
+-    }
+-    public void MyClick(View v){
+-                startActivity( new Intent(this,MainActivity.class) );
+-    }
++        @Override
++        protected void onCreate(Bundle savedInstanceState) {
++            super.onCreate(savedInstanceState);
++            setContentView(R.layout.activity_user);
++            findViewById( R.id.count_down ).setOnClickListener( new View.OnClickListener() {
++                @Override
++                public void onClick(View v) {
++                    initView();
++                }
++            } );
++        }
++
++
++        private void initView() {
++            count_down_num = (TextView) findViewById(R.id.count_down);
++            mhandler.postDelayed(runnable,1000);
++
++        }
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision feefdcff43076376b0c4cde7d835616252a76f5a)
++++ app/src/main/res/layout/activity_main.xml	(date 1607872032185)
+@@ -26,12 +26,6 @@
+         android:layout_height="wrap_content"
+         android:src="@mipmap/add_photo"
+         android:layout_margin="10dp"/>
+-    <ProgressBar
+-        android:id="@+id/pro_bar"
+-        android:layout_width="match_parent"
+-        android:layout_height="30dp"
+-        style="?android:attr/progressBarStyleHorizontal"
+-        android:visibility="invisible"/>
+     <EditText
+         android:id="@+id/name"
+         android:layout_width="match_parent"
+@@ -40,18 +34,7 @@
+         android:layout_marginRight="30dp"
+         android:layout_marginTop="18dp"
+         android:inputType="text"
+-        android:hint="Name and Surname"
+-        android:gravity="center"
+-        android:textColor="#cccccc"
+-        android:background="@mipmap/border"/>
+-    <EditText
+-        android:layout_width="match_parent"
+-        android:layout_height="68dp"
+-        android:layout_marginLeft ="30dp"
+-        android:layout_marginRight="30dp"
+-        android:layout_marginTop="18dp"
+-        android:inputType="text"
+-        android:hint="Emall adress"
++        android:hint="Name"
+         android:gravity="center"
+         android:textColor="#cccccc"
+         android:background="@mipmap/border"/>
+@@ -66,17 +49,17 @@
+         android:hint="password"
+         android:gravity="center"
+         android:textColor="#cccccc"
+-        android:background="@mipmap/border"
+-        android:maxLength="16"/>
++        android:background="@mipmap/border"/>
++
+     <Button
+         android:id="@+id/register"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:text="Register"
+-        android:layout_marginLeft ="30dp"
++        android:layout_marginLeft="30dp"
++        android:layout_marginTop="30dp"
+         android:layout_marginRight="30dp"
+-        android:layout_marginTop="40dp"
+         android:background="@mipmap/btn"
+-        android:onClick="Register"/>
++        android:onClick="Register"
++        android:text="Register" />
+ 
+ </LinearLayout>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision feefdcff43076376b0c4cde7d835616252a76f5a)
++++ app/src/main/AndroidManifest.xml	(date 1607871338021)
+@@ -9,7 +9,7 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.Homework2">
+-        <activity android:name=".UserActivity"></activity>
++        <activity android:name=".UserActivity" />
+         <activity android:name=".MainActivity">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
